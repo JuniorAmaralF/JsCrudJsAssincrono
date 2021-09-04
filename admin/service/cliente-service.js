@@ -24,9 +24,10 @@ const criaCliente = function(nome,email) {
         return resposta.body
     })
 }
-//recebe parametro id, que ira buscar no db.json na hora da exclusao
+//recebe parametro id, que ira buscar no db.json na hora da exclusa
+//comandos pela url , usar ``, aspas simples nao funciona
 const removeCliente = function (id){
-    return fetch('http://localhost:3000/profile/${id}',{
+    return fetch(`http://localhost:3000/profile/${id}`,{
         method:'DELETE'
     })
 }
