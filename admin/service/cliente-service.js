@@ -26,6 +26,7 @@ const criaCliente = function(nome,email) {
 }
 //recebe parametro id, que ira buscar no db.json na hora da exclusa
 //comandos pela url , usar ``, aspas simples nao funciona
+//Deletar um cliente utilizando o verbo http DELETE
 const removeCliente = function (id){
     return fetch(`http://localhost:3000/profile/${id}`,{
         method:'DELETE'

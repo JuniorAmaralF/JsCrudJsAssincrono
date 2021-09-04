@@ -19,6 +19,7 @@ const criaNovaLinha = function(nome,email,id){
 }
 const tabela = document.querySelector('[data-tabela]');
 
+//método closest para encontrar o elemento do DOM mais próximo ao que queremos remover
 tabela.addEventListener('click', function (evento) {
    let ehBotaoDeletar = evento.target.className = 'botao-simples botao-simples--excluir'
    if (ehBotaoDeletar){
@@ -26,6 +27,7 @@ tabela.addEventListener('click', function (evento) {
        let id = linhaCliente.dataset.id;
        clienteService.removeCliente(id)
        .then(function(){
+           //Remover um elemento do dom com método remove()
            linhaCliente.remove()
        })
    }
