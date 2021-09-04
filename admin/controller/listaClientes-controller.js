@@ -10,10 +10,8 @@ const criaNovaLinha = function(nome,email){
                         <li><button class="botao-simples botao-simples--excluir" type="button">Excluir</button></li>
                     </ul>
                 </td>
-                 `
-    
+                 `   
     linhaNovoCliente.innerHTML = conteudo;
-
     return linhaNovoCliente;
 
 }
