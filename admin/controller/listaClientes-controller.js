@@ -26,19 +26,31 @@ tabela.addEventListener('click', async function (evento) {
     //colocar com tres igual , sem isso pode ocorrer erro de selecao
    let ehBotaoDeletar = evento.target.className === 'botao-simples botao-simples--excluir'
    if (ehBotaoDeletar){
-       const linhaCliente = evento.target.closest('[data-id]');
-       let id = linhaCliente.dataset.id;
+       try {
+        const linhaCliente = evento.target.closest('[data-id]');
+        let id = linhaCliente.dataset.id;
         await clienteService.removeCliente(id);
       //Remover um elemento do dom com método remove()
-           linhaCliente.remove();   
+        linhaCliente.remove();  
+       } catch (erro){
+            console.log(erro)
+            window.location.href = '../telas/erro.html'
+       }
+        
    }
 })
 
 const render = async function (){
-    const listaClientes = await clienteService.listaClientes()
+    try {
+        const listaClientes = await clienteService.listaClientes()
         listaClientes.forEach(elemento =>{
         tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email, elemento.id));
     })
+    } catch (erro) {
+        console.log(erro);
+        window.location.href = '../telas/erro.html';
+    }
+   
 }
 
 render();
