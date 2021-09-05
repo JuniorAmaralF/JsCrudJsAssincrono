@@ -9,6 +9,17 @@ const inputEmail = document.querySelector('[data-email]');
 
 clienteService.detalhaCliente(id)
 .then(dados => {
-    inputNome.value = dados.nome
-    inputEmail.value = dados.email
+    inputNome.value = dados.nome;
+    inputEmail.value = dados.email;
+})
+
+const formulario = document.querySelector('[data-form]');
+
+formulario.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    clienteService.atualizarCliente(id,inputNome.value,inputEmail.value)
+    .then(()=>{
+        window.location.href = "../telas/edicao_concluida.html"
+    }) 
 })
