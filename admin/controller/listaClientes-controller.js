@@ -15,28 +15,30 @@ const criaNovaLinha = function(nome,email,id){
     linhaNovoCliente.dataset.id = id;
 
     return linhaNovoCliente;
-
 }
 const tabela = document.querySelector('[data-tabela]');
 
 //método closest para encontrar o elemento do DOM mais próximo ao que queremos remover
-tabela.addEventListener('click', function (evento) {
+//async indica que e uma funcao assicrona, que pode conter uma expressão await,
+// que pausa a execução da função assíncrona e espera pela resolução da promise. Depois retorna a 
+//função assíncrona e retorna o valor resolvido. Ele substitui o .then.
+tabela.addEventListener('click', async function (evento) {
     //colocar com tres igual , sem isso pode ocorrer erro de selecao
    let ehBotaoDeletar = evento.target.className === 'botao-simples botao-simples--excluir'
    if (ehBotaoDeletar){
        const linhaCliente = evento.target.closest('[data-id]');
        let id = linhaCliente.dataset.id;
-       clienteService.removeCliente(id)
-       .then(function(){
-           //Remover um elemento do dom com método remove()
-           linhaCliente.remove()
-       })
+        await clienteService.removeCliente(id);
+      //Remover um elemento do dom com método remove()
+           linhaCliente.remove();   
    }
-
 })
 
-clienteService.listaClientes()
-.then(data => {
-    data.forEach(elemento =>{
-    tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email, elemento.id));
-})})
+const render = async function (){
+    const listaClientes = await clienteService.listaClientes()
+        listaClientes.forEach(elemento =>{
+        tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email, elemento.id));
+    })
+}
+
+render();
